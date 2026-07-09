@@ -1,0 +1,58 @@
+name: Deploy web-risk-viewer to GitHub Pages
+
+# Only Risk Viewer and the Crop Health tab are deployed here - both are fully
+# static (see apps/web-risk-viewer/src/utils/dataLoader.ts). The Crop Loss
+# Probability tab still needs apps/damage-api running somewhere with live
+# ECMWF HRES access; it degrades to a "failed to load" message on this static
+# deploy rather than breaking the rest of the app (see CropLossProbabilityPanel.tsx).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/web-risk-viewer/**"
+      - ".github/workflows/deploy-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: apps/web-risk-viewer/package-lock.json
+
+      - run: npm ci
+        working-directory: apps/web-risk-viewer
+
+      - run: npm run build
+        working-directory: apps/web-risk-viewer
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/web-risk-viewer/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

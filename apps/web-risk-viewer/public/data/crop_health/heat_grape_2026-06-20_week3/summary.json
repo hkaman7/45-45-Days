@@ -1,0 +1,34 @@
+{
+  "event_id": "heat_grape_2026-06-20_week3",
+  "crop": "grape",
+  "threshold_f": 95.0,
+  "note": "acres.acres_affected uses real CSB field acreage, classified by whether the field's centroid LST (post-event MODIS composite) exceeds the crop's stress threshold. observed.prob_below_normal_yield is a SINGLE-SNAPSHOT approximation (one 5-day composite, not a real multi-day distribution) applying the baseline (Tmax-stress-only) model to LST-as-Tmax-proxy - prototype fidelity, not production-grade. forecast.* is the existing Objective 1 routine S2S-forecast prediction for the same county/crop, shown for comparison, not blended.",
+  "counties": {
+    "06025": {
+      "geoid": "06025",
+      "county_name": "Imperial",
+      "crop": "grape",
+      "acres": {
+        "n_fields": 123,
+        "total_acres": 974.1329236846682,
+        "n_fields_affected": 12,
+        "acres_affected": 137.00504282402886,
+        "pct_acres_affected": 14.064306779182232
+      },
+      "observed": {
+        "mean_after_lst_f": 10.304098129272461,
+        "stress_f_proxy": 0.0,
+        "prob_below_normal_yield": 0.38831771689865857,
+        "expected_reduction_pct": 0.0,
+        "confidence_score": 0.0,
+        "model_type": "RandomForest"
+      },
+      "forecast": {
+        "week_group": "week4",
+        "prob_below_normal_yield": 0.5224015475761862,
+        "expected_reduction_pct": 0.5736247667879587,
+        "risk_class": "Moderate"
+      }
+    }
+  }
+}

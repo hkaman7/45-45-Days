@@ -1,0 +1,59 @@
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+.DS_Store
+
+data/
+products/
+# The frontend's own static asset directory is named "data" too - the bare
+# pattern above (meant for data_pipelines/data/ and data_pipelines/products/)
+# would otherwise silently exclude everything the deployed web app serves.
+!apps/web-risk-viewer/public/data/
+!apps/web-risk-viewer/public/data/**
+
+# This repo is public - the data pipeline (feature engineering, model
+# training, GEE queries, thresholds) and its backend API stay out of the
+# public history entirely. Their static OUTPUT (baked into
+# apps/web-risk-viewer/public/data/) is what's actually shipped/deployed.
+/data_pipelines/
+/apps/damage-api/
+/requirements.txt
+
+.env
+.env.*
+*.log
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Node / frontend build
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+# tsc -b's project-reference build for vite.config.ts (tsconfig.node.json has no
+# noEmit) writes compiled output next to the source - not part of the app itself.
+apps/web-risk-viewer/vite.config.js
+apps/web-risk-viewer/vite.config.d.ts
+
+# Data / model artifacts
+*.grib
+*.grib2
+*.nc
+*.npy
+*.npz
+*.pt
+*.pth
+*.ckpt

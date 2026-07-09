@@ -1,0 +1,220 @@
+{
+  "event_id": "heat_grape_2026-06-20_week3",
+  "date_windows": {
+    "before": {
+      "start": "2026-05-21",
+      "end": "2026-06-20"
+    },
+    "after": {
+      "start": "2026-06-20",
+      "end": "2026-06-25"
+    }
+  },
+  "sensors": {
+    "s2_ndvi": {
+      "label": "NDVI",
+      "windows": {
+        "before": {
+          "png": "/data/crop_health/heat_grape_2026-06-20_week3/s2_ndvi_before.png",
+          "bounds": [
+            [
+              32.67199637801224,
+              -115.71046461145257
+            ],
+            [
+              32.78805871272048,
+              -115.55954764372049
+            ]
+          ],
+          "value_range": [
+            0.0,
+            0.7
+          ],
+          "valid_pixel_pct": 100.0
+        },
+        "after": {
+          "png": "/data/crop_health/heat_grape_2026-06-20_week3/s2_ndvi_after.png",
+          "bounds": [
+            [
+              32.67199637801224,
+              -115.71046461145257
+            ],
+            [
+              32.78805871272048,
+              -115.55954764372049
+            ]
+          ],
+          "value_range": [
+            0.0,
+            0.7
+          ],
+          "valid_pixel_pct": 99.99755823381984
+        }
+      }
+    },
+    "s2_ndmi": {
+      "label": "NDMI",
+      "windows": {
+        "before": {
+          "png": "/data/crop_health/heat_grape_2026-06-20_week3/s2_ndmi_before.png",
+          "bounds": [
+            [
+              32.67199637801224,
+              -115.71046461145257
+            ],
+            [
+              32.78805871272048,
+              -115.55954764372049
+            ]
+          ],
+          "value_range": [
+            -0.3,
+            0.3
+          ],
+          "valid_pixel_pct": 100.0
+        },
+        "after": {
+          "png": "/data/crop_health/heat_grape_2026-06-20_week3/s2_ndmi_after.png",
+          "bounds": [
+            [
+              32.67199637801224,
+              -115.71046461145257
+            ],
+            [
+              32.78805871272048,
+              -115.55954764372049
+            ]
+          ],
+          "value_range": [
+            -0.3,
+            0.3
+          ],
+          "valid_pixel_pct": 99.99755823381984
+        }
+      }
+    },
+    "s1_backscatter": {
+      "label": "VV Backscatter (dB)",
+      "windows": {
+        "before": {
+          "png": "/data/crop_health/heat_grape_2026-06-20_week3/s1_backscatter_before.png",
+          "bounds": [
+            [
+              32.67199637801224,
+              -115.71046461145257
+            ],
+            [
+              32.78805871272048,
+              -115.55954764372049
+            ]
+          ],
+          "value_range": [
+            -20.0,
+            0.0
+          ],
+          "valid_pixel_pct": 100.0
+        },
+        "after": {
+          "png": "/data/crop_health/heat_grape_2026-06-20_week3/s1_backscatter_after.png",
+          "bounds": [
+            [
+              32.67199637801224,
+              -115.71046461145257
+            ],
+            [
+              32.78805871272048,
+              -115.55954764372049
+            ]
+          ],
+          "value_range": [
+            -20.0,
+            0.0
+          ],
+          "valid_pixel_pct": 100.0
+        }
+      }
+    },
+    "modis_lst": {
+      "label": "LST - MODIS (\u00b0F)",
+      "windows": {
+        "before": {
+          "png": "/data/crop_health/heat_grape_2026-06-20_week3/modis_lst_before.png",
+          "bounds": [
+            [
+              32.671726883427,
+              -115.71199174743558
+            ],
+            [
+              32.78850787036254,
+              -115.55927814913525
+            ]
+          ],
+          "value_range": [
+            60.0,
+            150.0
+          ],
+          "valid_pixel_pct": 100.0
+        },
+        "after": {
+          "png": "/data/crop_health/heat_grape_2026-06-20_week3/modis_lst_after.png",
+          "bounds": [
+            [
+              32.671726883427,
+              -115.71199174743558
+            ],
+            [
+              32.78850787036254,
+              -115.55927814913525
+            ]
+          ],
+          "value_range": [
+            60.0,
+            150.0
+          ],
+          "valid_pixel_pct": 100.0
+        }
+      }
+    },
+    "viirs_lst": {
+      "label": "LST - VIIRS (\u00b0F)",
+      "windows": {
+        "before": {
+          "png": "/data/crop_health/heat_grape_2026-06-20_week3/viirs_lst_before.png",
+          "bounds": [
+            [
+              32.669481095216696,
+              -115.71423753564586
+            ],
+            [
+              32.79075365857283,
+              -115.55927814913525
+            ]
+          ],
+          "value_range": [
+            60.0,
+            160.0
+          ],
+          "valid_pixel_pct": 100.0
+        },
+        "after": {
+          "png": "/data/crop_health/heat_grape_2026-06-20_week3/viirs_lst_after.png",
+          "bounds": [
+            [
+              32.669481095216696,
+              -115.71423753564586
+            ],
+            [
+              32.79075365857283,
+              -115.55927814913525
+            ]
+          ],
+          "value_range": [
+            60.0,
+            160.0
+          ],
+          "valid_pixel_pct": 100.0
+        }
+      }
+    }
+  }
+}

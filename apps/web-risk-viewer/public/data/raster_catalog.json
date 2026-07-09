@@ -1,0 +1,1806 @@
+{
+  "forecast_init_date": "2026-06-20",
+  "conus_bounds": {
+    "lat_min": 25.066666666666666,
+    "lat_max": 49.400000000000006,
+    "lon_min": -124.76666663333334,
+    "lon_max": -67.05833330000002
+  },
+  "layers": [
+    {
+      "layer_id": "corn_week3_risk_category",
+      "display_group": "corn",
+      "week": "week3",
+      "map_type": "risk_category",
+      "threshold_F": null,
+      "png_path": "rasters/corn_week3_risk_category.png",
+      "color_scale": "categorical",
+      "gradient_css": null,
+      "units": "category",
+      "vmin": 0.0,
+      "vmax": 3.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "Low",
+          "color": "#4ade80"
+        },
+        {
+          "value": 1,
+          "label": "Moderate",
+          "color": "#fbbf24"
+        },
+        {
+          "value": 2,
+          "label": "High",
+          "color": "#f97316"
+        },
+        {
+          "value": 3,
+          "label": "Extreme",
+          "color": "#dc2626"
+        }
+      ],
+      "description": "Heat-stress risk category \u2014 Corn, Week 3. Highest class where P\u226540%.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_week3_ensemble_confidence",
+      "display_group": "corn",
+      "week": "week3",
+      "map_type": "ensemble_confidence",
+      "threshold_F": null,
+      "png_path": "rasters/corn_week3_ensemble_confidence.png",
+      "color_scale": "Blues",
+      "gradient_css": "linear-gradient(90deg,#f0f4ff,#93c5fd,#1d4ed8)",
+      "units": "confidence (0-1)",
+      "vmin": 0.0,
+      "vmax": 1.0,
+      "legend": null,
+      "description": "Ensemble confidence (max threshold probability) \u2014 Corn, Week 3.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_week3_tmax_anomaly_F",
+      "display_group": "corn",
+      "week": "week3",
+      "map_type": "tmax_anomaly_F",
+      "threshold_F": null,
+      "png_path": "rasters/corn_week3_tmax_anomaly_F.png",
+      "color_scale": "RdBu_r",
+      "gradient_css": "linear-gradient(90deg,#2166ac,#67a9cf,#f7f7f7,#ef8a62,#b2182b)",
+      "units": "\u00b0F",
+      "vmin": -7.21,
+      "vmax": 7.21,
+      "legend": null,
+      "description": "Forecast mean Tmax minus GridMET 2015\u20132025 climatology \u2014 Corn, Week 3.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_week3_climatological_percentile",
+      "display_group": "corn",
+      "week": "week3",
+      "map_type": "climatological_percentile",
+      "threshold_F": null,
+      "png_path": "rasters/corn_week3_climatological_percentile.png",
+      "color_scale": "RdYlBu_r",
+      "gradient_css": "linear-gradient(90deg,#4575b4,#74add1,#e0f3f8,#fee090,#fc8d59,#d73027)",
+      "units": "percentile (0-100)",
+      "vmin": 0.0,
+      "vmax": 100.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "0th"
+        },
+        {
+          "value": 25,
+          "label": "25th"
+        },
+        {
+          "value": 50,
+          "label": "50th"
+        },
+        {
+          "value": 75,
+          "label": "75th"
+        },
+        {
+          "value": 90,
+          "label": "90th"
+        },
+        {
+          "value": 95,
+          "label": "95th"
+        },
+        {
+          "value": 100,
+          "label": "100th"
+        }
+      ],
+      "description": "Percentile of forecast Tmax in GridMET 2015\u20132025 distribution \u2014 Corn, Week 3.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_week3_risk_category",
+      "display_group": "grapes",
+      "week": "week3",
+      "map_type": "risk_category",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_week3_risk_category.png",
+      "color_scale": "categorical",
+      "gradient_css": null,
+      "units": "category",
+      "vmin": 0.0,
+      "vmax": 4.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "Low",
+          "color": "#4ade80"
+        },
+        {
+          "value": 1,
+          "label": "Moderate",
+          "color": "#fbbf24"
+        },
+        {
+          "value": 2,
+          "label": "High",
+          "color": "#f97316"
+        },
+        {
+          "value": 3,
+          "label": "Very High",
+          "color": "#ea580c"
+        },
+        {
+          "value": 4,
+          "label": "Extreme",
+          "color": "#7c3aed"
+        }
+      ],
+      "description": "Heat-stress risk category \u2014 Grapes, Week 3. Highest class where P\u226540%.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_week3_ensemble_confidence",
+      "display_group": "grapes",
+      "week": "week3",
+      "map_type": "ensemble_confidence",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_week3_ensemble_confidence.png",
+      "color_scale": "Blues",
+      "gradient_css": "linear-gradient(90deg,#f0f4ff,#93c5fd,#1d4ed8)",
+      "units": "confidence (0-1)",
+      "vmin": 0.0,
+      "vmax": 1.0,
+      "legend": null,
+      "description": "Ensemble confidence (max threshold probability) \u2014 Grapes, Week 3.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_week3_tmax_anomaly_F",
+      "display_group": "grapes",
+      "week": "week3",
+      "map_type": "tmax_anomaly_F",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_week3_tmax_anomaly_F.png",
+      "color_scale": "RdBu_r",
+      "gradient_css": "linear-gradient(90deg,#2166ac,#67a9cf,#f7f7f7,#ef8a62,#b2182b)",
+      "units": "\u00b0F",
+      "vmin": -7.21,
+      "vmax": 7.21,
+      "legend": null,
+      "description": "Forecast mean Tmax minus GridMET 2015\u20132025 climatology \u2014 Grapes, Week 3.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_week3_climatological_percentile",
+      "display_group": "grapes",
+      "week": "week3",
+      "map_type": "climatological_percentile",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_week3_climatological_percentile.png",
+      "color_scale": "RdYlBu_r",
+      "gradient_css": "linear-gradient(90deg,#4575b4,#74add1,#e0f3f8,#fee090,#fc8d59,#d73027)",
+      "units": "percentile (0-100)",
+      "vmin": 0.0,
+      "vmax": 100.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "0th"
+        },
+        {
+          "value": 25,
+          "label": "25th"
+        },
+        {
+          "value": 50,
+          "label": "50th"
+        },
+        {
+          "value": 75,
+          "label": "75th"
+        },
+        {
+          "value": 90,
+          "label": "90th"
+        },
+        {
+          "value": 95,
+          "label": "95th"
+        },
+        {
+          "value": 100,
+          "label": "100th"
+        }
+      ],
+      "description": "Percentile of forecast Tmax in GridMET 2015\u20132025 distribution \u2014 Grapes, Week 3.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_week3_risk_category",
+      "display_group": "climatology_anomaly",
+      "week": "week3",
+      "map_type": "risk_category",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_week3_risk_category.png",
+      "color_scale": "categorical",
+      "gradient_css": null,
+      "units": "category",
+      "vmin": 0.0,
+      "vmax": 3.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "Low",
+          "color": "#4ade80"
+        },
+        {
+          "value": 1,
+          "label": "Moderate",
+          "color": "#fbbf24"
+        },
+        {
+          "value": 2,
+          "label": "High",
+          "color": "#f97316"
+        },
+        {
+          "value": 3,
+          "label": "Extreme",
+          "color": "#dc2626"
+        }
+      ],
+      "description": "Heat-stress risk category \u2014 Climatology / Anomaly, Week 3. Highest class where P\u226540%.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_week3_ensemble_confidence",
+      "display_group": "climatology_anomaly",
+      "week": "week3",
+      "map_type": "ensemble_confidence",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_week3_ensemble_confidence.png",
+      "color_scale": "Blues",
+      "gradient_css": "linear-gradient(90deg,#f0f4ff,#93c5fd,#1d4ed8)",
+      "units": "confidence (0-1)",
+      "vmin": 0.0,
+      "vmax": 1.0,
+      "legend": null,
+      "description": "Ensemble confidence (max threshold probability) \u2014 Climatology / Anomaly, Week 3.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_week3_tmax_anomaly_F",
+      "display_group": "climatology_anomaly",
+      "week": "week3",
+      "map_type": "tmax_anomaly_F",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_week3_tmax_anomaly_F.png",
+      "color_scale": "RdBu_r",
+      "gradient_css": "linear-gradient(90deg,#2166ac,#67a9cf,#f7f7f7,#ef8a62,#b2182b)",
+      "units": "\u00b0F",
+      "vmin": -7.21,
+      "vmax": 7.21,
+      "legend": null,
+      "description": "Forecast mean Tmax minus GridMET 2015\u20132025 climatology \u2014 Climatology / Anomaly, Week 3.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_week3_climatological_percentile",
+      "display_group": "climatology_anomaly",
+      "week": "week3",
+      "map_type": "climatological_percentile",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_week3_climatological_percentile.png",
+      "color_scale": "RdYlBu_r",
+      "gradient_css": "linear-gradient(90deg,#4575b4,#74add1,#e0f3f8,#fee090,#fc8d59,#d73027)",
+      "units": "percentile (0-100)",
+      "vmin": 0.0,
+      "vmax": 100.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "0th"
+        },
+        {
+          "value": 25,
+          "label": "25th"
+        },
+        {
+          "value": 50,
+          "label": "50th"
+        },
+        {
+          "value": 75,
+          "label": "75th"
+        },
+        {
+          "value": 90,
+          "label": "90th"
+        },
+        {
+          "value": 95,
+          "label": "95th"
+        },
+        {
+          "value": 100,
+          "label": "100th"
+        }
+      ],
+      "description": "Percentile of forecast Tmax in GridMET 2015\u20132025 distribution \u2014 Climatology / Anomaly, Week 3.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_week4_risk_category",
+      "display_group": "corn",
+      "week": "week4",
+      "map_type": "risk_category",
+      "threshold_F": null,
+      "png_path": "rasters/corn_week4_risk_category.png",
+      "color_scale": "categorical",
+      "gradient_css": null,
+      "units": "category",
+      "vmin": 0.0,
+      "vmax": 3.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "Low",
+          "color": "#4ade80"
+        },
+        {
+          "value": 1,
+          "label": "Moderate",
+          "color": "#fbbf24"
+        },
+        {
+          "value": 2,
+          "label": "High",
+          "color": "#f97316"
+        },
+        {
+          "value": 3,
+          "label": "Extreme",
+          "color": "#dc2626"
+        }
+      ],
+      "description": "Heat-stress risk category \u2014 Corn, Week 4. Highest class where P\u226540%.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_week4_ensemble_confidence",
+      "display_group": "corn",
+      "week": "week4",
+      "map_type": "ensemble_confidence",
+      "threshold_F": null,
+      "png_path": "rasters/corn_week4_ensemble_confidence.png",
+      "color_scale": "Blues",
+      "gradient_css": "linear-gradient(90deg,#f0f4ff,#93c5fd,#1d4ed8)",
+      "units": "confidence (0-1)",
+      "vmin": 0.0,
+      "vmax": 1.0,
+      "legend": null,
+      "description": "Ensemble confidence (max threshold probability) \u2014 Corn, Week 4.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_week4_tmax_anomaly_F",
+      "display_group": "corn",
+      "week": "week4",
+      "map_type": "tmax_anomaly_F",
+      "threshold_F": null,
+      "png_path": "rasters/corn_week4_tmax_anomaly_F.png",
+      "color_scale": "RdBu_r",
+      "gradient_css": "linear-gradient(90deg,#2166ac,#67a9cf,#f7f7f7,#ef8a62,#b2182b)",
+      "units": "\u00b0F",
+      "vmin": -7.52,
+      "vmax": 7.52,
+      "legend": null,
+      "description": "Forecast mean Tmax minus GridMET 2015\u20132025 climatology \u2014 Corn, Week 4.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_week4_climatological_percentile",
+      "display_group": "corn",
+      "week": "week4",
+      "map_type": "climatological_percentile",
+      "threshold_F": null,
+      "png_path": "rasters/corn_week4_climatological_percentile.png",
+      "color_scale": "RdYlBu_r",
+      "gradient_css": "linear-gradient(90deg,#4575b4,#74add1,#e0f3f8,#fee090,#fc8d59,#d73027)",
+      "units": "percentile (0-100)",
+      "vmin": 0.0,
+      "vmax": 100.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "0th"
+        },
+        {
+          "value": 25,
+          "label": "25th"
+        },
+        {
+          "value": 50,
+          "label": "50th"
+        },
+        {
+          "value": 75,
+          "label": "75th"
+        },
+        {
+          "value": 90,
+          "label": "90th"
+        },
+        {
+          "value": 95,
+          "label": "95th"
+        },
+        {
+          "value": 100,
+          "label": "100th"
+        }
+      ],
+      "description": "Percentile of forecast Tmax in GridMET 2015\u20132025 distribution \u2014 Corn, Week 4.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_week4_risk_category",
+      "display_group": "grapes",
+      "week": "week4",
+      "map_type": "risk_category",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_week4_risk_category.png",
+      "color_scale": "categorical",
+      "gradient_css": null,
+      "units": "category",
+      "vmin": 0.0,
+      "vmax": 4.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "Low",
+          "color": "#4ade80"
+        },
+        {
+          "value": 1,
+          "label": "Moderate",
+          "color": "#fbbf24"
+        },
+        {
+          "value": 2,
+          "label": "High",
+          "color": "#f97316"
+        },
+        {
+          "value": 3,
+          "label": "Very High",
+          "color": "#ea580c"
+        },
+        {
+          "value": 4,
+          "label": "Extreme",
+          "color": "#7c3aed"
+        }
+      ],
+      "description": "Heat-stress risk category \u2014 Grapes, Week 4. Highest class where P\u226540%.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_week4_ensemble_confidence",
+      "display_group": "grapes",
+      "week": "week4",
+      "map_type": "ensemble_confidence",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_week4_ensemble_confidence.png",
+      "color_scale": "Blues",
+      "gradient_css": "linear-gradient(90deg,#f0f4ff,#93c5fd,#1d4ed8)",
+      "units": "confidence (0-1)",
+      "vmin": 0.0,
+      "vmax": 1.0,
+      "legend": null,
+      "description": "Ensemble confidence (max threshold probability) \u2014 Grapes, Week 4.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_week4_tmax_anomaly_F",
+      "display_group": "grapes",
+      "week": "week4",
+      "map_type": "tmax_anomaly_F",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_week4_tmax_anomaly_F.png",
+      "color_scale": "RdBu_r",
+      "gradient_css": "linear-gradient(90deg,#2166ac,#67a9cf,#f7f7f7,#ef8a62,#b2182b)",
+      "units": "\u00b0F",
+      "vmin": -7.52,
+      "vmax": 7.52,
+      "legend": null,
+      "description": "Forecast mean Tmax minus GridMET 2015\u20132025 climatology \u2014 Grapes, Week 4.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_week4_climatological_percentile",
+      "display_group": "grapes",
+      "week": "week4",
+      "map_type": "climatological_percentile",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_week4_climatological_percentile.png",
+      "color_scale": "RdYlBu_r",
+      "gradient_css": "linear-gradient(90deg,#4575b4,#74add1,#e0f3f8,#fee090,#fc8d59,#d73027)",
+      "units": "percentile (0-100)",
+      "vmin": 0.0,
+      "vmax": 100.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "0th"
+        },
+        {
+          "value": 25,
+          "label": "25th"
+        },
+        {
+          "value": 50,
+          "label": "50th"
+        },
+        {
+          "value": 75,
+          "label": "75th"
+        },
+        {
+          "value": 90,
+          "label": "90th"
+        },
+        {
+          "value": 95,
+          "label": "95th"
+        },
+        {
+          "value": 100,
+          "label": "100th"
+        }
+      ],
+      "description": "Percentile of forecast Tmax in GridMET 2015\u20132025 distribution \u2014 Grapes, Week 4.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_week4_risk_category",
+      "display_group": "climatology_anomaly",
+      "week": "week4",
+      "map_type": "risk_category",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_week4_risk_category.png",
+      "color_scale": "categorical",
+      "gradient_css": null,
+      "units": "category",
+      "vmin": 0.0,
+      "vmax": 3.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "Low",
+          "color": "#4ade80"
+        },
+        {
+          "value": 1,
+          "label": "Moderate",
+          "color": "#fbbf24"
+        },
+        {
+          "value": 2,
+          "label": "High",
+          "color": "#f97316"
+        },
+        {
+          "value": 3,
+          "label": "Extreme",
+          "color": "#dc2626"
+        }
+      ],
+      "description": "Heat-stress risk category \u2014 Climatology / Anomaly, Week 4. Highest class where P\u226540%.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_week4_ensemble_confidence",
+      "display_group": "climatology_anomaly",
+      "week": "week4",
+      "map_type": "ensemble_confidence",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_week4_ensemble_confidence.png",
+      "color_scale": "Blues",
+      "gradient_css": "linear-gradient(90deg,#f0f4ff,#93c5fd,#1d4ed8)",
+      "units": "confidence (0-1)",
+      "vmin": 0.0,
+      "vmax": 1.0,
+      "legend": null,
+      "description": "Ensemble confidence (max threshold probability) \u2014 Climatology / Anomaly, Week 4.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_week4_tmax_anomaly_F",
+      "display_group": "climatology_anomaly",
+      "week": "week4",
+      "map_type": "tmax_anomaly_F",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_week4_tmax_anomaly_F.png",
+      "color_scale": "RdBu_r",
+      "gradient_css": "linear-gradient(90deg,#2166ac,#67a9cf,#f7f7f7,#ef8a62,#b2182b)",
+      "units": "\u00b0F",
+      "vmin": -7.52,
+      "vmax": 7.52,
+      "legend": null,
+      "description": "Forecast mean Tmax minus GridMET 2015\u20132025 climatology \u2014 Climatology / Anomaly, Week 4.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_week4_climatological_percentile",
+      "display_group": "climatology_anomaly",
+      "week": "week4",
+      "map_type": "climatological_percentile",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_week4_climatological_percentile.png",
+      "color_scale": "RdYlBu_r",
+      "gradient_css": "linear-gradient(90deg,#4575b4,#74add1,#e0f3f8,#fee090,#fc8d59,#d73027)",
+      "units": "percentile (0-100)",
+      "vmin": 0.0,
+      "vmax": 100.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "0th"
+        },
+        {
+          "value": 25,
+          "label": "25th"
+        },
+        {
+          "value": 50,
+          "label": "50th"
+        },
+        {
+          "value": 75,
+          "label": "75th"
+        },
+        {
+          "value": 90,
+          "label": "90th"
+        },
+        {
+          "value": 95,
+          "label": "95th"
+        },
+        {
+          "value": 100,
+          "label": "100th"
+        }
+      ],
+      "description": "Percentile of forecast Tmax in GridMET 2015\u20132025 distribution \u2014 Climatology / Anomaly, Week 4.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_week5_risk_category",
+      "display_group": "corn",
+      "week": "week5",
+      "map_type": "risk_category",
+      "threshold_F": null,
+      "png_path": "rasters/corn_week5_risk_category.png",
+      "color_scale": "categorical",
+      "gradient_css": null,
+      "units": "category",
+      "vmin": 0.0,
+      "vmax": 3.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "Low",
+          "color": "#4ade80"
+        },
+        {
+          "value": 1,
+          "label": "Moderate",
+          "color": "#fbbf24"
+        },
+        {
+          "value": 2,
+          "label": "High",
+          "color": "#f97316"
+        },
+        {
+          "value": 3,
+          "label": "Extreme",
+          "color": "#dc2626"
+        }
+      ],
+      "description": "Heat-stress risk category \u2014 Corn, Week 5. Highest class where P\u226540%.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_week5_ensemble_confidence",
+      "display_group": "corn",
+      "week": "week5",
+      "map_type": "ensemble_confidence",
+      "threshold_F": null,
+      "png_path": "rasters/corn_week5_ensemble_confidence.png",
+      "color_scale": "Blues",
+      "gradient_css": "linear-gradient(90deg,#f0f4ff,#93c5fd,#1d4ed8)",
+      "units": "confidence (0-1)",
+      "vmin": 0.0,
+      "vmax": 1.0,
+      "legend": null,
+      "description": "Ensemble confidence (max threshold probability) \u2014 Corn, Week 5.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_week5_tmax_anomaly_F",
+      "display_group": "corn",
+      "week": "week5",
+      "map_type": "tmax_anomaly_F",
+      "threshold_F": null,
+      "png_path": "rasters/corn_week5_tmax_anomaly_F.png",
+      "color_scale": "RdBu_r",
+      "gradient_css": "linear-gradient(90deg,#2166ac,#67a9cf,#f7f7f7,#ef8a62,#b2182b)",
+      "units": "\u00b0F",
+      "vmin": -7.43,
+      "vmax": 7.43,
+      "legend": null,
+      "description": "Forecast mean Tmax minus GridMET 2015\u20132025 climatology \u2014 Corn, Week 5.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_week5_climatological_percentile",
+      "display_group": "corn",
+      "week": "week5",
+      "map_type": "climatological_percentile",
+      "threshold_F": null,
+      "png_path": "rasters/corn_week5_climatological_percentile.png",
+      "color_scale": "RdYlBu_r",
+      "gradient_css": "linear-gradient(90deg,#4575b4,#74add1,#e0f3f8,#fee090,#fc8d59,#d73027)",
+      "units": "percentile (0-100)",
+      "vmin": 0.0,
+      "vmax": 100.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "0th"
+        },
+        {
+          "value": 25,
+          "label": "25th"
+        },
+        {
+          "value": 50,
+          "label": "50th"
+        },
+        {
+          "value": 75,
+          "label": "75th"
+        },
+        {
+          "value": 90,
+          "label": "90th"
+        },
+        {
+          "value": 95,
+          "label": "95th"
+        },
+        {
+          "value": 100,
+          "label": "100th"
+        }
+      ],
+      "description": "Percentile of forecast Tmax in GridMET 2015\u20132025 distribution \u2014 Corn, Week 5.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_week5_risk_category",
+      "display_group": "grapes",
+      "week": "week5",
+      "map_type": "risk_category",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_week5_risk_category.png",
+      "color_scale": "categorical",
+      "gradient_css": null,
+      "units": "category",
+      "vmin": 0.0,
+      "vmax": 4.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "Low",
+          "color": "#4ade80"
+        },
+        {
+          "value": 1,
+          "label": "Moderate",
+          "color": "#fbbf24"
+        },
+        {
+          "value": 2,
+          "label": "High",
+          "color": "#f97316"
+        },
+        {
+          "value": 3,
+          "label": "Very High",
+          "color": "#ea580c"
+        },
+        {
+          "value": 4,
+          "label": "Extreme",
+          "color": "#7c3aed"
+        }
+      ],
+      "description": "Heat-stress risk category \u2014 Grapes, Week 5. Highest class where P\u226540%.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_week5_ensemble_confidence",
+      "display_group": "grapes",
+      "week": "week5",
+      "map_type": "ensemble_confidence",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_week5_ensemble_confidence.png",
+      "color_scale": "Blues",
+      "gradient_css": "linear-gradient(90deg,#f0f4ff,#93c5fd,#1d4ed8)",
+      "units": "confidence (0-1)",
+      "vmin": 0.0,
+      "vmax": 1.0,
+      "legend": null,
+      "description": "Ensemble confidence (max threshold probability) \u2014 Grapes, Week 5.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_week5_tmax_anomaly_F",
+      "display_group": "grapes",
+      "week": "week5",
+      "map_type": "tmax_anomaly_F",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_week5_tmax_anomaly_F.png",
+      "color_scale": "RdBu_r",
+      "gradient_css": "linear-gradient(90deg,#2166ac,#67a9cf,#f7f7f7,#ef8a62,#b2182b)",
+      "units": "\u00b0F",
+      "vmin": -7.43,
+      "vmax": 7.43,
+      "legend": null,
+      "description": "Forecast mean Tmax minus GridMET 2015\u20132025 climatology \u2014 Grapes, Week 5.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_week5_climatological_percentile",
+      "display_group": "grapes",
+      "week": "week5",
+      "map_type": "climatological_percentile",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_week5_climatological_percentile.png",
+      "color_scale": "RdYlBu_r",
+      "gradient_css": "linear-gradient(90deg,#4575b4,#74add1,#e0f3f8,#fee090,#fc8d59,#d73027)",
+      "units": "percentile (0-100)",
+      "vmin": 0.0,
+      "vmax": 100.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "0th"
+        },
+        {
+          "value": 25,
+          "label": "25th"
+        },
+        {
+          "value": 50,
+          "label": "50th"
+        },
+        {
+          "value": 75,
+          "label": "75th"
+        },
+        {
+          "value": 90,
+          "label": "90th"
+        },
+        {
+          "value": 95,
+          "label": "95th"
+        },
+        {
+          "value": 100,
+          "label": "100th"
+        }
+      ],
+      "description": "Percentile of forecast Tmax in GridMET 2015\u20132025 distribution \u2014 Grapes, Week 5.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_week5_risk_category",
+      "display_group": "climatology_anomaly",
+      "week": "week5",
+      "map_type": "risk_category",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_week5_risk_category.png",
+      "color_scale": "categorical",
+      "gradient_css": null,
+      "units": "category",
+      "vmin": 0.0,
+      "vmax": 3.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "Low",
+          "color": "#4ade80"
+        },
+        {
+          "value": 1,
+          "label": "Moderate",
+          "color": "#fbbf24"
+        },
+        {
+          "value": 2,
+          "label": "High",
+          "color": "#f97316"
+        },
+        {
+          "value": 3,
+          "label": "Extreme",
+          "color": "#dc2626"
+        }
+      ],
+      "description": "Heat-stress risk category \u2014 Climatology / Anomaly, Week 5. Highest class where P\u226540%.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_week5_ensemble_confidence",
+      "display_group": "climatology_anomaly",
+      "week": "week5",
+      "map_type": "ensemble_confidence",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_week5_ensemble_confidence.png",
+      "color_scale": "Blues",
+      "gradient_css": "linear-gradient(90deg,#f0f4ff,#93c5fd,#1d4ed8)",
+      "units": "confidence (0-1)",
+      "vmin": 0.0,
+      "vmax": 1.0,
+      "legend": null,
+      "description": "Ensemble confidence (max threshold probability) \u2014 Climatology / Anomaly, Week 5.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_week5_tmax_anomaly_F",
+      "display_group": "climatology_anomaly",
+      "week": "week5",
+      "map_type": "tmax_anomaly_F",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_week5_tmax_anomaly_F.png",
+      "color_scale": "RdBu_r",
+      "gradient_css": "linear-gradient(90deg,#2166ac,#67a9cf,#f7f7f7,#ef8a62,#b2182b)",
+      "units": "\u00b0F",
+      "vmin": -7.43,
+      "vmax": 7.43,
+      "legend": null,
+      "description": "Forecast mean Tmax minus GridMET 2015\u20132025 climatology \u2014 Climatology / Anomaly, Week 5.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_week5_climatological_percentile",
+      "display_group": "climatology_anomaly",
+      "week": "week5",
+      "map_type": "climatological_percentile",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_week5_climatological_percentile.png",
+      "color_scale": "RdYlBu_r",
+      "gradient_css": "linear-gradient(90deg,#4575b4,#74add1,#e0f3f8,#fee090,#fc8d59,#d73027)",
+      "units": "percentile (0-100)",
+      "vmin": 0.0,
+      "vmax": 100.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "0th"
+        },
+        {
+          "value": 25,
+          "label": "25th"
+        },
+        {
+          "value": 50,
+          "label": "50th"
+        },
+        {
+          "value": 75,
+          "label": "75th"
+        },
+        {
+          "value": 90,
+          "label": "90th"
+        },
+        {
+          "value": 95,
+          "label": "95th"
+        },
+        {
+          "value": 100,
+          "label": "100th"
+        }
+      ],
+      "description": "Percentile of forecast Tmax in GridMET 2015\u20132025 distribution \u2014 Climatology / Anomaly, Week 5.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_week6_risk_category",
+      "display_group": "corn",
+      "week": "week6",
+      "map_type": "risk_category",
+      "threshold_F": null,
+      "png_path": "rasters/corn_week6_risk_category.png",
+      "color_scale": "categorical",
+      "gradient_css": null,
+      "units": "category",
+      "vmin": 0.0,
+      "vmax": 3.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "Low",
+          "color": "#4ade80"
+        },
+        {
+          "value": 1,
+          "label": "Moderate",
+          "color": "#fbbf24"
+        },
+        {
+          "value": 2,
+          "label": "High",
+          "color": "#f97316"
+        },
+        {
+          "value": 3,
+          "label": "Extreme",
+          "color": "#dc2626"
+        }
+      ],
+      "description": "Heat-stress risk category \u2014 Corn, Week 6. Highest class where P\u226540%.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_week6_ensemble_confidence",
+      "display_group": "corn",
+      "week": "week6",
+      "map_type": "ensemble_confidence",
+      "threshold_F": null,
+      "png_path": "rasters/corn_week6_ensemble_confidence.png",
+      "color_scale": "Blues",
+      "gradient_css": "linear-gradient(90deg,#f0f4ff,#93c5fd,#1d4ed8)",
+      "units": "confidence (0-1)",
+      "vmin": 0.0,
+      "vmax": 1.0,
+      "legend": null,
+      "description": "Ensemble confidence (max threshold probability) \u2014 Corn, Week 6.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_week6_tmax_anomaly_F",
+      "display_group": "corn",
+      "week": "week6",
+      "map_type": "tmax_anomaly_F",
+      "threshold_F": null,
+      "png_path": "rasters/corn_week6_tmax_anomaly_F.png",
+      "color_scale": "RdBu_r",
+      "gradient_css": "linear-gradient(90deg,#2166ac,#67a9cf,#f7f7f7,#ef8a62,#b2182b)",
+      "units": "\u00b0F",
+      "vmin": -5.28,
+      "vmax": 5.28,
+      "legend": null,
+      "description": "Forecast mean Tmax minus GridMET 2015\u20132025 climatology \u2014 Corn, Week 6.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_week6_climatological_percentile",
+      "display_group": "corn",
+      "week": "week6",
+      "map_type": "climatological_percentile",
+      "threshold_F": null,
+      "png_path": "rasters/corn_week6_climatological_percentile.png",
+      "color_scale": "RdYlBu_r",
+      "gradient_css": "linear-gradient(90deg,#4575b4,#74add1,#e0f3f8,#fee090,#fc8d59,#d73027)",
+      "units": "percentile (0-100)",
+      "vmin": 0.0,
+      "vmax": 100.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "0th"
+        },
+        {
+          "value": 25,
+          "label": "25th"
+        },
+        {
+          "value": 50,
+          "label": "50th"
+        },
+        {
+          "value": 75,
+          "label": "75th"
+        },
+        {
+          "value": 90,
+          "label": "90th"
+        },
+        {
+          "value": 95,
+          "label": "95th"
+        },
+        {
+          "value": 100,
+          "label": "100th"
+        }
+      ],
+      "description": "Percentile of forecast Tmax in GridMET 2015\u20132025 distribution \u2014 Corn, Week 6.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_week6_risk_category",
+      "display_group": "grapes",
+      "week": "week6",
+      "map_type": "risk_category",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_week6_risk_category.png",
+      "color_scale": "categorical",
+      "gradient_css": null,
+      "units": "category",
+      "vmin": 0.0,
+      "vmax": 4.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "Low",
+          "color": "#4ade80"
+        },
+        {
+          "value": 1,
+          "label": "Moderate",
+          "color": "#fbbf24"
+        },
+        {
+          "value": 2,
+          "label": "High",
+          "color": "#f97316"
+        },
+        {
+          "value": 3,
+          "label": "Very High",
+          "color": "#ea580c"
+        },
+        {
+          "value": 4,
+          "label": "Extreme",
+          "color": "#7c3aed"
+        }
+      ],
+      "description": "Heat-stress risk category \u2014 Grapes, Week 6. Highest class where P\u226540%.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_week6_ensemble_confidence",
+      "display_group": "grapes",
+      "week": "week6",
+      "map_type": "ensemble_confidence",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_week6_ensemble_confidence.png",
+      "color_scale": "Blues",
+      "gradient_css": "linear-gradient(90deg,#f0f4ff,#93c5fd,#1d4ed8)",
+      "units": "confidence (0-1)",
+      "vmin": 0.0,
+      "vmax": 1.0,
+      "legend": null,
+      "description": "Ensemble confidence (max threshold probability) \u2014 Grapes, Week 6.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_week6_tmax_anomaly_F",
+      "display_group": "grapes",
+      "week": "week6",
+      "map_type": "tmax_anomaly_F",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_week6_tmax_anomaly_F.png",
+      "color_scale": "RdBu_r",
+      "gradient_css": "linear-gradient(90deg,#2166ac,#67a9cf,#f7f7f7,#ef8a62,#b2182b)",
+      "units": "\u00b0F",
+      "vmin": -5.28,
+      "vmax": 5.28,
+      "legend": null,
+      "description": "Forecast mean Tmax minus GridMET 2015\u20132025 climatology \u2014 Grapes, Week 6.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_week6_climatological_percentile",
+      "display_group": "grapes",
+      "week": "week6",
+      "map_type": "climatological_percentile",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_week6_climatological_percentile.png",
+      "color_scale": "RdYlBu_r",
+      "gradient_css": "linear-gradient(90deg,#4575b4,#74add1,#e0f3f8,#fee090,#fc8d59,#d73027)",
+      "units": "percentile (0-100)",
+      "vmin": 0.0,
+      "vmax": 100.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "0th"
+        },
+        {
+          "value": 25,
+          "label": "25th"
+        },
+        {
+          "value": 50,
+          "label": "50th"
+        },
+        {
+          "value": 75,
+          "label": "75th"
+        },
+        {
+          "value": 90,
+          "label": "90th"
+        },
+        {
+          "value": 95,
+          "label": "95th"
+        },
+        {
+          "value": 100,
+          "label": "100th"
+        }
+      ],
+      "description": "Percentile of forecast Tmax in GridMET 2015\u20132025 distribution \u2014 Grapes, Week 6.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_week6_risk_category",
+      "display_group": "climatology_anomaly",
+      "week": "week6",
+      "map_type": "risk_category",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_week6_risk_category.png",
+      "color_scale": "categorical",
+      "gradient_css": null,
+      "units": "category",
+      "vmin": 0.0,
+      "vmax": 3.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "Low",
+          "color": "#4ade80"
+        },
+        {
+          "value": 1,
+          "label": "Moderate",
+          "color": "#fbbf24"
+        },
+        {
+          "value": 2,
+          "label": "High",
+          "color": "#f97316"
+        },
+        {
+          "value": 3,
+          "label": "Extreme",
+          "color": "#dc2626"
+        }
+      ],
+      "description": "Heat-stress risk category \u2014 Climatology / Anomaly, Week 6. Highest class where P\u226540%.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_week6_ensemble_confidence",
+      "display_group": "climatology_anomaly",
+      "week": "week6",
+      "map_type": "ensemble_confidence",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_week6_ensemble_confidence.png",
+      "color_scale": "Blues",
+      "gradient_css": "linear-gradient(90deg,#f0f4ff,#93c5fd,#1d4ed8)",
+      "units": "confidence (0-1)",
+      "vmin": 0.0,
+      "vmax": 1.0,
+      "legend": null,
+      "description": "Ensemble confidence (max threshold probability) \u2014 Climatology / Anomaly, Week 6.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_week6_tmax_anomaly_F",
+      "display_group": "climatology_anomaly",
+      "week": "week6",
+      "map_type": "tmax_anomaly_F",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_week6_tmax_anomaly_F.png",
+      "color_scale": "RdBu_r",
+      "gradient_css": "linear-gradient(90deg,#2166ac,#67a9cf,#f7f7f7,#ef8a62,#b2182b)",
+      "units": "\u00b0F",
+      "vmin": -5.28,
+      "vmax": 5.28,
+      "legend": null,
+      "description": "Forecast mean Tmax minus GridMET 2015\u20132025 climatology \u2014 Climatology / Anomaly, Week 6.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_week6_climatological_percentile",
+      "display_group": "climatology_anomaly",
+      "week": "week6",
+      "map_type": "climatological_percentile",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_week6_climatological_percentile.png",
+      "color_scale": "RdYlBu_r",
+      "gradient_css": "linear-gradient(90deg,#4575b4,#74add1,#e0f3f8,#fee090,#fc8d59,#d73027)",
+      "units": "percentile (0-100)",
+      "vmin": 0.0,
+      "vmax": 100.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "0th"
+        },
+        {
+          "value": 25,
+          "label": "25th"
+        },
+        {
+          "value": 50,
+          "label": "50th"
+        },
+        {
+          "value": 75,
+          "label": "75th"
+        },
+        {
+          "value": 90,
+          "label": "90th"
+        },
+        {
+          "value": 95,
+          "label": "95th"
+        },
+        {
+          "value": 100,
+          "label": "100th"
+        }
+      ],
+      "description": "Percentile of forecast Tmax in GridMET 2015\u20132025 distribution \u2014 Climatology / Anomaly, Week 6.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_any_week_risk_category",
+      "display_group": "corn",
+      "week": "any_week",
+      "map_type": "risk_category",
+      "threshold_F": null,
+      "png_path": "rasters/corn_any_week_risk_category.png",
+      "color_scale": "categorical",
+      "gradient_css": null,
+      "units": "category",
+      "vmin": 0.0,
+      "vmax": 3.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "Low",
+          "color": "#4ade80"
+        },
+        {
+          "value": 1,
+          "label": "Moderate",
+          "color": "#fbbf24"
+        },
+        {
+          "value": 2,
+          "label": "High",
+          "color": "#f97316"
+        },
+        {
+          "value": 3,
+          "label": "Extreme",
+          "color": "#dc2626"
+        }
+      ],
+      "description": "Heat-stress risk category \u2014 Corn, Any Week (worst case across week3\u20136). Highest class where P\u226540%.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_any_week_ensemble_confidence",
+      "display_group": "corn",
+      "week": "any_week",
+      "map_type": "ensemble_confidence",
+      "threshold_F": null,
+      "png_path": "rasters/corn_any_week_ensemble_confidence.png",
+      "color_scale": "Blues",
+      "gradient_css": "linear-gradient(90deg,#f0f4ff,#93c5fd,#1d4ed8)",
+      "units": "confidence (0-1)",
+      "vmin": 0.0,
+      "vmax": 1.0,
+      "legend": null,
+      "description": "Ensemble confidence (max threshold probability) \u2014 Corn, Any Week (worst case across week3\u20136).",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_any_week_tmax_anomaly_F",
+      "display_group": "corn",
+      "week": "any_week",
+      "map_type": "tmax_anomaly_F",
+      "threshold_F": null,
+      "png_path": "rasters/corn_any_week_tmax_anomaly_F.png",
+      "color_scale": "RdBu_r",
+      "gradient_css": "linear-gradient(90deg,#2166ac,#67a9cf,#f7f7f7,#ef8a62,#b2182b)",
+      "units": "\u00b0F",
+      "vmin": -7.21,
+      "vmax": 7.21,
+      "legend": null,
+      "description": "Forecast mean Tmax minus GridMET 2015\u20132025 climatology \u2014 Corn, Any Week (worst case across week3\u20136).",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "corn_any_week_climatological_percentile",
+      "display_group": "corn",
+      "week": "any_week",
+      "map_type": "climatological_percentile",
+      "threshold_F": null,
+      "png_path": "rasters/corn_any_week_climatological_percentile.png",
+      "color_scale": "RdYlBu_r",
+      "gradient_css": "linear-gradient(90deg,#4575b4,#74add1,#e0f3f8,#fee090,#fc8d59,#d73027)",
+      "units": "percentile (0-100)",
+      "vmin": 0.0,
+      "vmax": 100.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "0th"
+        },
+        {
+          "value": 25,
+          "label": "25th"
+        },
+        {
+          "value": 50,
+          "label": "50th"
+        },
+        {
+          "value": 75,
+          "label": "75th"
+        },
+        {
+          "value": 90,
+          "label": "90th"
+        },
+        {
+          "value": 95,
+          "label": "95th"
+        },
+        {
+          "value": 100,
+          "label": "100th"
+        }
+      ],
+      "description": "Percentile of forecast Tmax in GridMET 2015\u20132025 distribution \u2014 Corn, Any Week (worst case across week3\u20136).",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_any_week_risk_category",
+      "display_group": "grapes",
+      "week": "any_week",
+      "map_type": "risk_category",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_any_week_risk_category.png",
+      "color_scale": "categorical",
+      "gradient_css": null,
+      "units": "category",
+      "vmin": 0.0,
+      "vmax": 4.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "Low",
+          "color": "#4ade80"
+        },
+        {
+          "value": 1,
+          "label": "Moderate",
+          "color": "#fbbf24"
+        },
+        {
+          "value": 2,
+          "label": "High",
+          "color": "#f97316"
+        },
+        {
+          "value": 3,
+          "label": "Very High",
+          "color": "#ea580c"
+        },
+        {
+          "value": 4,
+          "label": "Extreme",
+          "color": "#7c3aed"
+        }
+      ],
+      "description": "Heat-stress risk category \u2014 Grapes, Any Week (worst case across week3\u20136). Highest class where P\u226540%.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_any_week_ensemble_confidence",
+      "display_group": "grapes",
+      "week": "any_week",
+      "map_type": "ensemble_confidence",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_any_week_ensemble_confidence.png",
+      "color_scale": "Blues",
+      "gradient_css": "linear-gradient(90deg,#f0f4ff,#93c5fd,#1d4ed8)",
+      "units": "confidence (0-1)",
+      "vmin": 0.0,
+      "vmax": 1.0,
+      "legend": null,
+      "description": "Ensemble confidence (max threshold probability) \u2014 Grapes, Any Week (worst case across week3\u20136).",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_any_week_tmax_anomaly_F",
+      "display_group": "grapes",
+      "week": "any_week",
+      "map_type": "tmax_anomaly_F",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_any_week_tmax_anomaly_F.png",
+      "color_scale": "RdBu_r",
+      "gradient_css": "linear-gradient(90deg,#2166ac,#67a9cf,#f7f7f7,#ef8a62,#b2182b)",
+      "units": "\u00b0F",
+      "vmin": -7.21,
+      "vmax": 7.21,
+      "legend": null,
+      "description": "Forecast mean Tmax minus GridMET 2015\u20132025 climatology \u2014 Grapes, Any Week (worst case across week3\u20136).",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "grapes_any_week_climatological_percentile",
+      "display_group": "grapes",
+      "week": "any_week",
+      "map_type": "climatological_percentile",
+      "threshold_F": null,
+      "png_path": "rasters/grapes_any_week_climatological_percentile.png",
+      "color_scale": "RdYlBu_r",
+      "gradient_css": "linear-gradient(90deg,#4575b4,#74add1,#e0f3f8,#fee090,#fc8d59,#d73027)",
+      "units": "percentile (0-100)",
+      "vmin": 0.0,
+      "vmax": 100.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "0th"
+        },
+        {
+          "value": 25,
+          "label": "25th"
+        },
+        {
+          "value": 50,
+          "label": "50th"
+        },
+        {
+          "value": 75,
+          "label": "75th"
+        },
+        {
+          "value": 90,
+          "label": "90th"
+        },
+        {
+          "value": 95,
+          "label": "95th"
+        },
+        {
+          "value": 100,
+          "label": "100th"
+        }
+      ],
+      "description": "Percentile of forecast Tmax in GridMET 2015\u20132025 distribution \u2014 Grapes, Any Week (worst case across week3\u20136).",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_any_week_risk_category",
+      "display_group": "climatology_anomaly",
+      "week": "any_week",
+      "map_type": "risk_category",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_any_week_risk_category.png",
+      "color_scale": "categorical",
+      "gradient_css": null,
+      "units": "category",
+      "vmin": 0.0,
+      "vmax": 3.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "Low",
+          "color": "#4ade80"
+        },
+        {
+          "value": 1,
+          "label": "Moderate",
+          "color": "#fbbf24"
+        },
+        {
+          "value": 2,
+          "label": "High",
+          "color": "#f97316"
+        },
+        {
+          "value": 3,
+          "label": "Extreme",
+          "color": "#dc2626"
+        }
+      ],
+      "description": "Heat-stress risk category \u2014 Climatology / Anomaly, Any Week (worst case across week3\u20136). Highest class where P\u226540%.",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_any_week_ensemble_confidence",
+      "display_group": "climatology_anomaly",
+      "week": "any_week",
+      "map_type": "ensemble_confidence",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_any_week_ensemble_confidence.png",
+      "color_scale": "Blues",
+      "gradient_css": "linear-gradient(90deg,#f0f4ff,#93c5fd,#1d4ed8)",
+      "units": "confidence (0-1)",
+      "vmin": 0.0,
+      "vmax": 1.0,
+      "legend": null,
+      "description": "Ensemble confidence (max threshold probability) \u2014 Climatology / Anomaly, Any Week (worst case across week3\u20136).",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_any_week_tmax_anomaly_F",
+      "display_group": "climatology_anomaly",
+      "week": "any_week",
+      "map_type": "tmax_anomaly_F",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_any_week_tmax_anomaly_F.png",
+      "color_scale": "RdBu_r",
+      "gradient_css": "linear-gradient(90deg,#2166ac,#67a9cf,#f7f7f7,#ef8a62,#b2182b)",
+      "units": "\u00b0F",
+      "vmin": -7.21,
+      "vmax": 7.21,
+      "legend": null,
+      "description": "Forecast mean Tmax minus GridMET 2015\u20132025 climatology \u2014 Climatology / Anomaly, Any Week (worst case across week3\u20136).",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    },
+    {
+      "layer_id": "climatology_anomaly_any_week_climatological_percentile",
+      "display_group": "climatology_anomaly",
+      "week": "any_week",
+      "map_type": "climatological_percentile",
+      "threshold_F": null,
+      "png_path": "rasters/climatology_anomaly_any_week_climatological_percentile.png",
+      "color_scale": "RdYlBu_r",
+      "gradient_css": "linear-gradient(90deg,#4575b4,#74add1,#e0f3f8,#fee090,#fc8d59,#d73027)",
+      "units": "percentile (0-100)",
+      "vmin": 0.0,
+      "vmax": 100.0,
+      "legend": [
+        {
+          "value": 0,
+          "label": "0th"
+        },
+        {
+          "value": 25,
+          "label": "25th"
+        },
+        {
+          "value": 50,
+          "label": "50th"
+        },
+        {
+          "value": 75,
+          "label": "75th"
+        },
+        {
+          "value": 90,
+          "label": "90th"
+        },
+        {
+          "value": 95,
+          "label": "95th"
+        },
+        {
+          "value": 100,
+          "label": "100th"
+        }
+      ],
+      "description": "Percentile of forecast Tmax in GridMET 2015\u20132025 distribution \u2014 Climatology / Anomaly, Any Week (worst case across week3\u20136).",
+      "forecast_init_date": "2026-06-20",
+      "source": "bias_corrected_s2s/mx2t6_gridmet_20260620_full_gridmet_conus_filled_edges/s2s_mx2t6_tmax_bias_corrected_downscaled_gridmet_2026-06-20.nc"
+    }
+  ]
+}
