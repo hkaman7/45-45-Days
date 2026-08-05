@@ -1,6 +1,4 @@
-# 45+45
-
-**A national warning-to-response platform for weather-driven risk to U.S. food and agricultural systems.**
+# 45+45 days: A national warning-to-response platform for weather-driven risk to U.S. food and agricultural systems.
 
 🔗 **Live demo:** [hkaman7.github.io/45-45-Days](https://hkaman7.github.io/45-45-Days/)
 
