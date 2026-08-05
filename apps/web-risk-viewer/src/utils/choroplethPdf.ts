@@ -52,11 +52,15 @@ interface DrawChoroplethParams {
   metricsIndex: MetricsIndex;
   climatologyIndex: ClimatologyIndex;
   highlightGeoid?: string | null;
+  /** Overrides product.bounds/CONUS_BOUNDS - pass a tight region (e.g. the
+   * selected county's own bbox, padded) to crop the drawn map to just that
+   * area instead of projecting the full country into the box. */
+  regionBounds?: [[number, number], [number, number]];
 }
 
 export function drawChoropleth(params: DrawChoroplethParams): void {
-  const { doc, x, y, width, height, counties, product, metricsIndex, climatologyIndex, highlightGeoid } = params;
-  const bounds = product.bounds ?? CONUS_BOUNDS;
+  const { doc, x, y, width, height, counties, product, metricsIndex, climatologyIndex, highlightGeoid, regionBounds } = params;
+  const bounds = regionBounds ?? product.bounds ?? CONUS_BOUNDS;
 
   doc.setFillColor("#f9fafb");
   doc.rect(x, y, width, height, "F");

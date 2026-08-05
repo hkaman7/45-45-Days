@@ -21,9 +21,10 @@ import type { CountyCropHealth, CropHealthMapManifest, DamageEvent } from "../ty
 import type { CropId, CropLossMetric, ReferenceMode, WeekId } from "../types/products";
 import { withBase } from "./basePath";
 import { formatNumber, formatPercent, formatPercentValue, WEEK_LABELS } from "./formatters";
-import { PRODUCT_TYPES, getProduct } from "../config/products";
+import { CONUS_BOUNDS, PRODUCT_TYPES, getProduct } from "../config/products";
 import { type ClimatologyIndex, type MetricsIndex } from "./leafletLayers";
 import { drawChoropleth } from "./choroplethPdf";
+import { bboxOf, cropRasterToGeometry } from "./rasterCrop";
 
 // ---------------------------------------------------------------------------
 // Shared PDF-building helpers
@@ -273,7 +274,8 @@ interface RiskViewerReportParams {
   referenceMode: ReferenceMode;
   forecastInitDate: string;
   weekRows: CropLossMetric[]; // this county+crop's rows, any order, any subset of week3..week6
-  counties: Feature[];
+  countyFeature: Feature; // the selected county's own feature - all 6 maps crop to this
+  fieldFeature: Feature | null; // if a field's also selected, raster maps crop tighter to this
   metricsIndex: MetricsIndex;
   climatologyIndex: ClimatologyIndex;
 }
@@ -312,7 +314,20 @@ function discussLeadTimes(cropLabel: string, countyName: string, weekRows: CropL
 }
 
 export async function generateRiskViewerReportPdf(params: RiskViewerReportParams): Promise<void> {
-  const { countyName, geoid, crop, cropLabel, week, referenceMode, forecastInitDate, weekRows, counties, metricsIndex, climatologyIndex } = params;
+  const { countyName, geoid, crop, cropLabel, week, referenceMode, forecastInitDate, weekRows, countyFeature, fieldFeature, metricsIndex, climatologyIndex } = params;
+
+  // Every map in this report crops to the selected county (tighter still, to the
+  // selected field, for the 2 raster products - vector choropleths stay at county
+  // granularity since that's the real resolution of that data, see MapView.tsx).
+  // Same padded-bbox convention as the live map's own crop (utils/rasterCrop.ts).
+  const rasterCropGeometry = fieldFeature?.geometry ?? countyFeature.geometry;
+  const [countyMinLon, countyMinLat, countyMaxLon, countyMaxLat] = bboxOf(countyFeature.geometry);
+  const countyPadLon = (countyMaxLon - countyMinLon) * 0.08;
+  const countyPadLat = (countyMaxLat - countyMinLat) * 0.08;
+  const vectorRegionBounds: [[number, number], [number, number]] = [
+    [countyMinLat - countyPadLat, countyMinLon - countyPadLon],
+    [countyMaxLat + countyPadLat, countyMaxLon + countyPadLon],
+  ];
 
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const b = createPdfBuilder(doc);
@@ -328,16 +343,21 @@ export async function generateRiskViewerReportPdf(params: RiskViewerReportParams
 
   const sorted = [...weekRows].sort((a, r) => WEEK_ORDER[a.week_group] - WEEK_ORDER[r.week_group]);
 
-  // --- All 6 product-type maps, not just the one currently selected on screen.
+  // --- All 6 product-type maps, not just the one currently selected on screen -
+  // and every one cropped to the selected county (or field, for the 2 raster
+  // products), not the full CONUS extent.
   // 2 of the 6 (crop_stress, heatwave_probability) have a real pre-rendered raster
-  // PNG - embedded as-is, the most precise representation available. The other 4
-  // are vector choropleths in the live app (no PNG exists for them - see MapView.tsx)
-  // so they're drawn here as real vector county polygons via drawChoropleth(),
-  // reusing the exact same getCountyValue()/styleForValue() logic the on-screen map
-  // uses, so colors match exactly. Falls back to referenceMode="forecast" per product
-  // if the current referenceMode has no data for it (e.g. climatology_baseline only
-  // has real data in "forecast" mode - see config/products.ts's vectorEntry()).
-  b.addWrappedText("Risk Maps — All Products", 12, 15, { bold: true });
+  // PNG - cropped client-side (Canvas, see utils/rasterCrop.ts) to the selection's
+  // real shape, the same crop the live map itself shows once you click a county.
+  // The other 4 are vector choropleths in the live app (no PNG exists for them -
+  // see MapView.tsx) so they're drawn here as real vector polygons via
+  // drawChoropleth(), filtered to just the selected county and projected into a
+  // region-bounds box instead of the whole country, reusing the exact same
+  // getCountyValue()/styleForValue() logic the on-screen map uses so colors match
+  // exactly. Falls back to referenceMode="forecast" per product if the current
+  // referenceMode has no data for it (e.g. climatology_baseline only has real data
+  // in "forecast" mode - see config/products.ts's vectorEntry()).
+  b.addWrappedText(`Risk Maps — ${countyName} County`, 12, 15, { bold: true });
   b.y += 2;
 
   const mapCols = 2;
@@ -367,10 +387,22 @@ export async function generateRiskViewerReportPdf(params: RiskViewerReportParams
       doc.setDrawColor(209, 213, 219);
       doc.rect(x, rowY + 16, mapColWidth, mapImgHeight);
     } else if (product.layerType === "raster" && product.rasterUrl) {
-      const img = await fetchAsDataUrl(withBase(product.rasterUrl));
-      drawImageBox(b, img, x, rowY + 16, mapColWidth, mapImgHeight);
+      const cropped = await cropRasterToGeometry(withBase(product.rasterUrl), product.bounds ?? CONUS_BOUNDS, rasterCropGeometry);
+      drawImageBox(b, cropped, x, rowY + 16, mapColWidth, mapImgHeight);
     } else {
-      drawChoropleth({ doc, x, y: rowY + 16, width: mapColWidth, height: mapImgHeight, counties, product, metricsIndex, climatologyIndex, highlightGeoid: geoid });
+      drawChoropleth({
+        doc,
+        x,
+        y: rowY + 16,
+        width: mapColWidth,
+        height: mapImgHeight,
+        counties: [countyFeature],
+        product,
+        metricsIndex,
+        climatologyIndex,
+        highlightGeoid: geoid,
+        regionBounds: vectorRegionBounds,
+      });
     }
 
     if (col === mapCols - 1 || i === PRODUCT_TYPES.length - 1) {

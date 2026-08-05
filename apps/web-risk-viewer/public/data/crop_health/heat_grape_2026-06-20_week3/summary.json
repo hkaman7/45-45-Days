@@ -18,8 +18,8 @@
       "observed": {
         "mean_after_lst_f": 10.304098129272461,
         "stress_f_proxy": 0.0,
-        "prob_below_normal_yield": 0.38831771689865857,
-        "expected_reduction_pct": 0.0,
+        "prob_below_normal_yield": 0.5347562644266926,
+        "expected_reduction_pct": 0.9599123579288996,
         "confidence_score": 0.0,
         "model_type": "RandomForest"
       },

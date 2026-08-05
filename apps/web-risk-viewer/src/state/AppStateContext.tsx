@@ -124,7 +124,16 @@ function reducer(state: AppState, action: AppAction): AppState {
     case "TOGGLE_CONTROL_PANEL":
       return { ...state, controlPanelCollapsed: !state.controlPanelCollapsed };
     case "RESET_EXTENT":
-      return { ...state, resetExtentToken: state.resetExtentToken + 1 };
+      // Also clears county/field selection - the map crops to whatever's selected
+      // (see MapView.tsx), so "reset extent" back to the national view only makes
+      // sense paired with dropping the selection that was cropping it.
+      return {
+        ...state,
+        resetExtentToken: state.resetExtentToken + 1,
+        selectedCountyGeoid: null,
+        selectedFieldId: null,
+        selectedFieldAcres: null,
+      };
     case "FLY_TO_COUNTY":
       return {
         ...state,

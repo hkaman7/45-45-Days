@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { GeoJSON, ImageOverlay, MapContainer, TileLayer, useMap } from "react-leaflet";
-import type { Feature, FeatureCollection } from "geojson";
+import type { Feature, FeatureCollection, Geometry } from "geojson";
 import type { Layer, Path, PathOptions } from "leaflet";
 import { CONUS_BOUNDS } from "../config/products";
 import { getCountyValue, styleForValue, type ClimatologyIndex, type MetricsIndex } from "../utils/leafletLayers";
 import { loadCountyFields } from "../utils/dataLoader";
 import { withBase } from "../utils/basePath";
+import { bboxOf, cropRasterToGeometry, type CroppedRaster } from "../utils/rasterCrop";
 import { MapLayerControl } from "./MapLayerControl";
 import { useAppDispatch, useAppState } from "../state/AppStateContext";
 import type { CountyFeatureProperties, FieldFeatureProperties, ProductConfig } from "../types/products";
@@ -75,8 +76,22 @@ function MapController({ counties }: { counties: FeatureCollection }) {
   return null;
 }
 
+/** Zooms/fits to whatever's currently selected (field tighter than county,
+ * county tighter than nothing) - runs whenever the selection itself changes,
+ * not on every render, so panning around a selected county doesn't keep
+ * getting yanked back. `selectionKey` is fieldId ?? geoid ?? "none" so this
+ * fires exactly once per actual selection change. */
+function FitToSelection({ bounds, selectionKey }: { bounds: [[number, number], [number, number]] | null; selectionKey: string }) {
+  const map = useMap();
+  useEffect(() => {
+    if (bounds) map.fitBounds(bounds, { padding: [24, 24] });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectionKey]);
+  return null;
+}
+
 export function MapView({ counties, metricsIndex, climatologyIndex, product }: Props) {
-  const { baseLayer, opacity, selectedCountyGeoid, crop } = useAppState();
+  const { baseLayer, opacity, selectedCountyGeoid, selectedFieldId, crop } = useAppState();
   const dispatch = useAppDispatch();
   const selectedLayerRef = useRef<Path | null>(null);
   const selectedFieldLayerRef = useRef<Path | null>(null);
@@ -110,6 +125,56 @@ export function MapView({ counties, metricsIndex, climatologyIndex, product }: P
   const tile = TILE_LAYERS[baseLayer];
   const showRaster = product?.layerType === "raster" && product.dataAvailable && product.rasterUrl;
   const showVector = product?.layerType === "vector";
+
+  const selectedCountyFeature = useMemo(
+    () => (selectedCountyGeoid ? counties.features.find((f) => (f.properties as CountyFeatureProperties).geoid === selectedCountyGeoid) : undefined),
+    [counties, selectedCountyGeoid],
+  );
+  const selectedFieldFeature = useMemo(
+    () => (selectedFieldId && countyFields ? countyFields.features.find((f) => (f.properties as FieldFeatureProperties).csb_id === selectedFieldId) : undefined),
+    [countyFields, selectedFieldId],
+  );
+  // Field crops tighter than county, county crops tighter than nothing (full CONUS) -
+  // this one geometry drives both the raster crop and the map's fit-to-selection.
+  const selectionGeometry: Geometry | null = selectedFieldFeature?.geometry ?? selectedCountyFeature?.geometry ?? null;
+  const selectionKey = selectedFieldId ?? selectedCountyGeoid ?? "none";
+
+  // Counties actually rendered on the map/in the vector layer - just the
+  // selected one once something's selected, not all ~3100 nationally. Click a
+  // county to select it in the first place, so the unfiltered set is only
+  // shown before any selection exists.
+  const visibleCounties = useMemo<FeatureCollection>(() => {
+    if (!selectedCountyFeature) return counties;
+    return { type: "FeatureCollection", features: [selectedCountyFeature] };
+  }, [counties, selectedCountyFeature]);
+
+  const [croppedRaster, setCroppedRaster] = useState<CroppedRaster | null>(null);
+
+  // Crop the raster to whatever's selected (field tighter than county) - full
+  // CONUS raster only when nothing is selected. Runs client-side (Canvas),
+  // same crop utility the PDF report reuses (see utils/rasterCrop.ts).
+  useEffect(() => {
+    if (!showRaster || !selectionGeometry) {
+      setCroppedRaster(null);
+      return;
+    }
+    let cancelled = false;
+    cropRasterToGeometry(withBase(product!.rasterUrl!), product!.bounds ?? CONUS_BOUNDS, selectionGeometry).then((cropped) => {
+      if (!cancelled) setCroppedRaster(cropped);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [showRaster, product?.rasterUrl, selectionGeometry]);
+
+  const selectionBounds = useMemo<[[number, number], [number, number]] | null>(() => {
+    if (!selectionGeometry) return null;
+    const [minLon, minLat, maxLon, maxLat] = bboxOf(selectionGeometry);
+    return [
+      [minLat, minLon],
+      [maxLat, maxLon],
+    ];
+  }, [selectionGeometry]);
 
   const fieldsValue = product && selectedCountyGeoid && product.dataAvailable
     ? getCountyValue(product, metricsIndex, climatologyIndex, selectedCountyGeoid)
@@ -169,14 +234,21 @@ export function MapView({ counties, metricsIndex, climatologyIndex, product }: P
       <MapContainer center={CONUS_CENTER} zoom={CONUS_ZOOM} className="leaflet-container-full" scrollWheelZoom>
         <TileLayer url={tile.url} attribution={tile.attribution} />
         <MapController counties={counties} />
+        <FitToSelection bounds={selectionBounds} selectionKey={selectionKey} />
 
         {showRaster && (
           <>
-            <ImageOverlay url={withBase(product!.rasterUrl!)} bounds={product!.bounds ?? CONUS_BOUNDS} opacity={opacity} />
-            {/* County outlines over the raster, same as every vector product already shows - fill-less so the raster stays fully visible underneath. */}
+            <ImageOverlay
+              key={croppedRaster ? `crop-${selectionKey}` : "conus"}
+              url={croppedRaster ? croppedRaster.dataUrl : withBase(product!.rasterUrl!)}
+              bounds={croppedRaster ? croppedRaster.bounds : product!.bounds ?? CONUS_BOUNDS}
+              opacity={opacity}
+            />
+            {/* County outlines over the raster, same as every vector product already shows - fill-less so the raster stays fully visible underneath.
+                Just the selected county once one's picked, matching the cropped raster above - see visibleCounties. */}
             <GeoJSON
-              key={`boundary-${product?.crop}-${product?.productType}-${product?.week}-${product?.referenceMode}`}
-              data={counties}
+              key={`boundary-${selectionKey}-${product?.crop}-${product?.productType}-${product?.week}-${product?.referenceMode}`}
+              data={visibleCounties}
               style={boundaryStyle}
               onEachFeature={makeOnEachFeature(0.5, "#5b5b5b")}
             />
@@ -185,8 +257,8 @@ export function MapView({ counties, metricsIndex, climatologyIndex, product }: P
 
         {showVector && (
           <GeoJSON
-            key={`${product?.crop}-${product?.productType}-${product?.week}-${product?.referenceMode}`}
-            data={counties}
+            key={`${selectionKey}-${product?.crop}-${product?.productType}-${product?.week}-${product?.referenceMode}`}
+            data={visibleCounties}
             style={style}
             onEachFeature={makeOnEachFeature(0.4, "#4a4a4a")}
           />

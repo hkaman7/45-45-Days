@@ -4,8 +4,9 @@ import { FORECAST_INIT_DATE, getProductTypeLabel } from "../config/products";
 import { resolveMetricRow, type ClimatologyIndex, type MetricsIndex } from "../utils/leafletLayers";
 import { CROP_LABELS, WEEK_LABELS, formatDate, formatNumber, formatPercent, formatPercentValue } from "../utils/formatters";
 import { useAppState } from "../state/AppStateContext";
-import type { CropLossMetric, ProductConfig } from "../types/products";
+import type { CropLossMetric, FieldFeatureProperties, ProductConfig } from "../types/products";
 import { generateRiskViewerReportPdf } from "../utils/pdfReport";
+import { loadCountyFields } from "../utils/dataLoader";
 
 interface Props {
   counties: Feature[];
@@ -21,7 +22,7 @@ function countyName(counties: Feature[], geoid: string): string {
 }
 
 export function CountyInfoPanel({ counties, metricsIndex, climatologyIndex, allMetrics, product }: Props) {
-  const { crop, week, referenceMode, selectedCountyGeoid } = useAppState();
+  const { crop, week, referenceMode, selectedCountyGeoid, selectedFieldId } = useAppState();
   const [generatingPdf, setGeneratingPdf] = useState(false);
 
   const weekRows = useMemo(() => {
@@ -62,8 +63,20 @@ export function CountyInfoPanel({ counties, metricsIndex, climatologyIndex, allM
 
   async function onGenerateReport() {
     if (!selectedCountyGeoid) return;
+    const countyFeature = counties.find((c) => (c.properties as { geoid: string }).geoid === selectedCountyGeoid);
+    if (!countyFeature) return;
+
     setGeneratingPdf(true);
     try {
+      // Field geometry isn't otherwise loaded here (only MapView keeps county
+      // fields in memory, for rendering) - fetch it on demand, only when a field
+      // is actually selected and only for the moment of generating the report.
+      let fieldFeature: Feature | null = null;
+      if (selectedFieldId) {
+        const fields = await loadCountyFields(crop, selectedCountyGeoid);
+        fieldFeature = fields?.features.find((f) => (f.properties as FieldFeatureProperties).csb_id === selectedFieldId) ?? null;
+      }
+
       await generateRiskViewerReportPdf({
         countyName: countyName(counties, selectedCountyGeoid),
         geoid: selectedCountyGeoid,
@@ -73,7 +86,8 @@ export function CountyInfoPanel({ counties, metricsIndex, climatologyIndex, allM
         referenceMode,
         forecastInitDate: formatDate(FORECAST_INIT_DATE),
         weekRows: selectedCountyAllWeeks,
-        counties,
+        countyFeature,
+        fieldFeature,
         metricsIndex,
         climatologyIndex,
       });
