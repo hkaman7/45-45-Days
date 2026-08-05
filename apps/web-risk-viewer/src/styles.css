@@ -304,43 +304,82 @@ html, body, #root {
 }
 
 /* Base map + opacity, floating top-right - Leaflet's own zoom control sits top-left
-   by default, so this doesn't collide with it. */
+   by default, so this doesn't collide with it. A single icon button that expands
+   into a picker menu on click, matching the collapsed-by-default convention most
+   web maps use for layer switchers instead of a permanently-visible row of pills. */
 .map-layer-control {
   position: absolute;
   top: 12px;
   right: 12px;
   z-index: 900;
+}
+.map-layer-icon-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  border: none;
+  background: white;
+  color: #1f2937;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.map-layer-icon-button:hover {
+  background: #f3f4f6;
+}
+.map-layer-menu {
+  position: absolute;
+  top: 46px;
+  right: 0;
   background: white;
   border-radius: 8px;
-  padding: 0.6rem 0.75rem;
+  padding: 0.6rem 0.5rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   width: 200px;
 }
-.map-layer-control-row + .map-layer-control-row {
-  margin-top: 0.6rem;
-}
-.map-layer-control-label {
-  display: block;
+.map-layer-menu-label {
   font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: #6b7280;
-  margin-bottom: 0.3rem;
+  padding: 0.2rem 0.5rem;
 }
-.pill-group-light {
-  gap: 0.3rem;
+.map-layer-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  border: none;
+  background: none;
+  color: #1f2937;
+  font-size: 0.82rem;
+  text-align: left;
+  border-radius: 6px;
+  cursor: pointer;
 }
-.pill-light {
-  padding: 0.28rem 0.55rem;
-  font-size: 0.72rem;
-  border-color: #d1d5db;
+.map-layer-menu-item:hover {
   background: #f3f4f6;
-  color: #374151;
 }
-.pill-light.pill-active {
-  background: #2563eb;
-  border-color: #2563eb;
-  color: white;
+.map-layer-menu-item-active {
+  font-weight: 600;
+  color: #2563eb;
+}
+.map-layer-check {
+  width: 14px;
+  color: #2563eb;
+  font-weight: 700;
+}
+.map-layer-menu-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 0.4rem 0.25rem;
+}
+.map-layer-menu .slider {
+  margin: 0.2rem 0.5rem 0.3rem;
+  width: calc(100% - 1rem);
 }
 
 .legend {
