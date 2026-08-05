@@ -92,7 +92,6 @@ export function CropHealthPanel({ counties }: Props) {
         countyName: countyProps.county_name,
         county,
         threshold_f: summary.threshold_f,
-        summaryNote: summary.note,
         manifest,
         selectedIndex: selectedCropHealthIndex,
         selectedIndexLabel: sensor?.label ?? selectedCropHealthIndex,

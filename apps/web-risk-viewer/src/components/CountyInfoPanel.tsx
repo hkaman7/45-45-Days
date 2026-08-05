@@ -1,10 +1,11 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import type { Feature } from "geojson";
 import { FORECAST_INIT_DATE, getProductTypeLabel } from "../config/products";
 import { resolveMetricRow, type ClimatologyIndex, type MetricsIndex } from "../utils/leafletLayers";
 import { CROP_LABELS, WEEK_LABELS, formatDate, formatNumber, formatPercent, formatPercentValue } from "../utils/formatters";
 import { useAppState } from "../state/AppStateContext";
 import type { CropLossMetric, ProductConfig } from "../types/products";
+import { generateRiskViewerReportPdf } from "../utils/pdfReport";
 
 interface Props {
   counties: Feature[];
@@ -21,6 +22,7 @@ function countyName(counties: Feature[], geoid: string): string {
 
 export function CountyInfoPanel({ counties, metricsIndex, climatologyIndex, allMetrics, product }: Props) {
   const { crop, week, selectedCountyGeoid } = useAppState();
+  const [generatingPdf, setGeneratingPdf] = useState(false);
 
   const weekRows = useMemo(() => {
     if (week !== "wk3_6") return allMetrics.filter((m) => m.crop === crop && m.week_group === week);
@@ -50,6 +52,33 @@ export function CountyInfoPanel({ counties, metricsIndex, climatologyIndex, allM
     : undefined;
   const selectedClimatology = selectedCountyGeoid ? climatologyIndex.get(`${selectedCountyGeoid}|${crop}`) : undefined;
 
+  // All lead times (week3..week6) for the selected county+crop, regardless of which
+  // single week is currently displayed on the map - the PDF report discusses the
+  // whole outlook, not just the current selection.
+  const selectedCountyAllWeeks = useMemo(
+    () => (selectedCountyGeoid ? allMetrics.filter((m) => m.geoid === selectedCountyGeoid && m.crop === crop) : []),
+    [allMetrics, crop, selectedCountyGeoid],
+  );
+
+  async function onGenerateReport() {
+    if (!selectedCountyGeoid) return;
+    setGeneratingPdf(true);
+    try {
+      await generateRiskViewerReportPdf({
+        countyName: countyName(counties, selectedCountyGeoid),
+        geoid: selectedCountyGeoid,
+        cropLabel: CROP_LABELS[crop],
+        productLabel: product ? getProductTypeLabel(product.productType) : "—",
+        forecastInitDate: formatDate(FORECAST_INIT_DATE),
+        weekRows: selectedCountyAllWeeks,
+        mapImageUrl: product?.rasterUrl ?? null,
+        mapImageLabel: product?.displayName ?? "Current Map",
+      });
+    } finally {
+      setGeneratingPdf(false);
+    }
+  }
+
   return (
     <aside className="info-panel">
       <div className="info-section">
@@ -73,7 +102,14 @@ export function CountyInfoPanel({ counties, metricsIndex, climatologyIndex, allM
       </div>
 
       <div className="info-section">
-        <h2>Selected County</h2>
+        <div className="info-section-header">
+          <h2>Selected County</h2>
+          {selectedCountyGeoid && (
+            <button className="pdf-report-button pdf-report-button-small" onClick={onGenerateReport} disabled={generatingPdf}>
+              {generatingPdf ? "Generating…" : "📄 PDF Report"}
+            </button>
+          )}
+        </div>
         {!selectedCountyGeoid && <p className="muted">Click a county on the map to see details here.</p>}
         {selectedCountyGeoid && !selectedRow && !selectedClimatology && (
           <p className="muted">No forecast data available for {countyName(counties, selectedCountyGeoid)}.</p>

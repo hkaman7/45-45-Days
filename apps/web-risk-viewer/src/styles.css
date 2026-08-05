@@ -386,6 +386,22 @@ html, body, #root {
   margin: 0 0 0.5rem;
 }
 
+.info-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.info-section-header h2 {
+  margin: 0 0 0.5rem;
+}
+.pdf-report-button-small {
+  margin-left: 0;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.72rem;
+  margin-bottom: 0.5rem;
+}
+
 .kv-list {
   display: grid;
   grid-template-columns: auto 1fr;
