@@ -21,7 +21,7 @@ function countyName(counties: Feature[], geoid: string): string {
 }
 
 export function CountyInfoPanel({ counties, metricsIndex, climatologyIndex, allMetrics, product }: Props) {
-  const { crop, week, selectedCountyGeoid } = useAppState();
+  const { crop, week, referenceMode, selectedCountyGeoid } = useAppState();
   const [generatingPdf, setGeneratingPdf] = useState(false);
 
   const weekRows = useMemo(() => {
@@ -67,12 +67,15 @@ export function CountyInfoPanel({ counties, metricsIndex, climatologyIndex, allM
       await generateRiskViewerReportPdf({
         countyName: countyName(counties, selectedCountyGeoid),
         geoid: selectedCountyGeoid,
+        crop,
         cropLabel: CROP_LABELS[crop],
-        productLabel: product ? getProductTypeLabel(product.productType) : "—",
+        week,
+        referenceMode,
         forecastInitDate: formatDate(FORECAST_INIT_DATE),
         weekRows: selectedCountyAllWeeks,
-        mapImageUrl: product?.rasterUrl ?? null,
-        mapImageLabel: product?.displayName ?? "Current Map",
+        counties,
+        metricsIndex,
+        climatologyIndex,
       });
     } finally {
       setGeneratingPdf(false);

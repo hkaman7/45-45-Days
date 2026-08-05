@@ -303,6 +303,46 @@ html, body, #root {
   max-width: calc(100% - 24px);
 }
 
+/* Base map + opacity, floating top-right - Leaflet's own zoom control sits top-left
+   by default, so this doesn't collide with it. */
+.map-layer-control {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 900;
+  background: white;
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  width: 200px;
+}
+.map-layer-control-row + .map-layer-control-row {
+  margin-top: 0.6rem;
+}
+.map-layer-control-label {
+  display: block;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+  margin-bottom: 0.3rem;
+}
+.pill-group-light {
+  gap: 0.3rem;
+}
+.pill-light {
+  padding: 0.28rem 0.55rem;
+  font-size: 0.72rem;
+  border-color: #d1d5db;
+  background: #f3f4f6;
+  color: #374151;
+}
+.pill-light.pill-active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: white;
+}
+
 .legend {
   background: white;
   border-radius: 8px;

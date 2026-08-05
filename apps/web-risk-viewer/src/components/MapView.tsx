@@ -6,6 +6,7 @@ import { CONUS_BOUNDS } from "../config/products";
 import { getCountyValue, styleForValue, type ClimatologyIndex, type MetricsIndex } from "../utils/leafletLayers";
 import { loadCountyFields } from "../utils/dataLoader";
 import { withBase } from "../utils/basePath";
+import { MapLayerControl } from "./MapLayerControl";
 import { useAppDispatch, useAppState } from "../state/AppStateContext";
 import type { CountyFeatureProperties, FieldFeatureProperties, ProductConfig } from "../types/products";
 
@@ -203,6 +204,8 @@ export function MapView({ counties, metricsIndex, climatologyIndex, product }: P
           />
         )}
       </MapContainer>
+
+      <MapLayerControl />
 
       {product && !product.dataAvailable && (
         <div className="map-placeholder-banner">No generated data yet for this combination — {product.description}</div>

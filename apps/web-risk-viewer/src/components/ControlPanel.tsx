@@ -2,8 +2,6 @@ import type { Feature } from "geojson";
 import { CropSelector } from "./CropSelector";
 import { ProductSelector } from "./ProductSelector";
 import { WeekSelector } from "./WeekSelector";
-import { ReferenceSelector } from "./ReferenceSelector";
-import { LayerToggle } from "./LayerToggle";
 import { CountySearch } from "./CountySearch";
 import { ModeSwitcher } from "./ModeSwitcher";
 import { DamageSubTabSwitcher } from "./DamageSubTabSwitcher";
@@ -45,8 +43,6 @@ export function ControlPanel({ counties }: Props) {
               <ProductSelector />
               <CropSelector />
               <WeekSelector />
-              <ReferenceSelector />
-              <LayerToggle />
               <CountySearch counties={counties} />
 
               <div className="control-group">

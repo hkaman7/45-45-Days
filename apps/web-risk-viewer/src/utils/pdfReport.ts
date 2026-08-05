@@ -16,10 +16,14 @@
 // looks like in practice.
 
 import { jsPDF } from "jspdf";
+import type { Feature } from "geojson";
 import type { CountyCropHealth, CropHealthMapManifest, DamageEvent } from "../types/damage";
-import type { CropLossMetric } from "../types/products";
+import type { CropId, CropLossMetric, ReferenceMode, WeekId } from "../types/products";
 import { withBase } from "./basePath";
 import { formatNumber, formatPercent, formatPercentValue, WEEK_LABELS } from "./formatters";
+import { PRODUCT_TYPES, getProduct } from "../config/products";
+import { type ClimatologyIndex, type MetricsIndex } from "./leafletLayers";
+import { drawChoropleth } from "./choroplethPdf";
 
 // ---------------------------------------------------------------------------
 // Shared PDF-building helpers
@@ -93,6 +97,20 @@ async function fetchAsDataUrl(url: string): Promise<{ dataUrl: string; width: nu
   }
 }
 
+function drawImageBox(b: PdfBuilder, img: { dataUrl: string; width: number; height: number } | null, x: number, boxY: number, colWidth: number, imgHeight: number) {
+  if (!img) {
+    b.doc.setDrawColor(209, 213, 219);
+    b.doc.rect(x, boxY, colWidth, imgHeight);
+    b.doc.setFontSize(9);
+    b.doc.setFont("helvetica", "normal");
+    b.doc.setTextColor(107, 114, 128);
+    b.doc.text("Image unavailable", x + 8, boxY + imgHeight / 2);
+    return;
+  }
+  const scale = Math.min(colWidth / img.width, imgHeight / img.height);
+  b.doc.addImage(img.dataUrl, "PNG", x, boxY, img.width * scale, img.height * scale);
+}
+
 function placeImage(
   b: PdfBuilder,
   img: { dataUrl: string; width: number; height: number } | null,
@@ -111,16 +129,7 @@ function placeImage(
   b.doc.setFont("helvetica", "normal");
   b.doc.setTextColor(107, 114, 128);
   b.doc.text(caption, x, rowY + 11);
-
-  if (!img) {
-    b.doc.setDrawColor(209, 213, 219);
-    b.doc.rect(x, rowY + 16, colWidth, imgHeight);
-    b.doc.setFontSize(9);
-    b.doc.text("Image unavailable", x + 8, rowY + 16 + imgHeight / 2);
-    return;
-  }
-  const scale = Math.min(colWidth / img.width, imgHeight / img.height);
-  b.doc.addImage(img.dataUrl, "PNG", x, rowY + 16, img.width * scale, img.height * scale);
+  drawImageBox(b, img, x, rowY + 16, colWidth, imgHeight);
 }
 
 function statsGrid(b: PdfBuilder, stats: [string, string][], nCols = 2) {
@@ -258,12 +267,15 @@ const WEEK_ORDER: Record<string, number> = { week3: 0, week4: 1, week5: 2, week6
 interface RiskViewerReportParams {
   countyName: string;
   geoid: string;
+  crop: CropId;
   cropLabel: string;
-  productLabel: string;
+  week: WeekId;
+  referenceMode: ReferenceMode;
   forecastInitDate: string;
   weekRows: CropLossMetric[]; // this county+crop's rows, any order, any subset of week3..week6
-  mapImageUrl: string | null; // product.rasterUrl, already a repo-root-relative path
-  mapImageLabel: string;
+  counties: Feature[];
+  metricsIndex: MetricsIndex;
+  climatologyIndex: ClimatologyIndex;
 }
 
 /** Deterministic trend/discussion narrative from the real per-week numbers - see the
@@ -300,7 +312,7 @@ function discussLeadTimes(cropLabel: string, countyName: string, weekRows: CropL
 }
 
 export async function generateRiskViewerReportPdf(params: RiskViewerReportParams): Promise<void> {
-  const { countyName, geoid, cropLabel, productLabel, forecastInitDate, weekRows, mapImageUrl, mapImageLabel } = params;
+  const { countyName, geoid, crop, cropLabel, week, referenceMode, forecastInitDate, weekRows, counties, metricsIndex, climatologyIndex } = params;
 
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const b = createPdfBuilder(doc);
@@ -311,19 +323,63 @@ export async function generateRiskViewerReportPdf(params: RiskViewerReportParams
   b.hr();
 
   b.addWrappedText(`County: ${countyName} County (FIPS ${geoid})`, 11, 15, { bold: true });
-  b.addWrappedText(`Crop: ${cropLabel} · Product: ${productLabel} · Forecast Init Date: ${forecastInitDate}`, 10, 13);
+  b.addWrappedText(`Crop: ${cropLabel} · Week: ${WEEK_LABELS[week]} · Forecast Init Date: ${forecastInitDate}`, 10, 13);
   b.y += 12;
 
   const sorted = [...weekRows].sort((a, r) => WEEK_ORDER[a.week_group] - WEEK_ORDER[r.week_group]);
 
-  if (mapImageUrl) {
-    b.ensureSpace(230);
-    const img = await fetchAsDataUrl(withBase(mapImageUrl));
-    const imgHeight = 200;
+  // --- All 6 product-type maps, not just the one currently selected on screen.
+  // 2 of the 6 (crop_stress, heatwave_probability) have a real pre-rendered raster
+  // PNG - embedded as-is, the most precise representation available. The other 4
+  // are vector choropleths in the live app (no PNG exists for them - see MapView.tsx)
+  // so they're drawn here as real vector county polygons via drawChoropleth(),
+  // reusing the exact same getCountyValue()/styleForValue() logic the on-screen map
+  // uses, so colors match exactly. Falls back to referenceMode="forecast" per product
+  // if the current referenceMode has no data for it (e.g. climatology_baseline only
+  // has real data in "forecast" mode - see config/products.ts's vectorEntry()).
+  b.addWrappedText("Risk Maps — All Products", 12, 15, { bold: true });
+  b.y += 2;
+
+  const mapCols = 2;
+  const mapGap = 12;
+  const mapColWidth = (b.contentWidth - mapGap) / mapCols;
+  const mapImgHeight = 145;
+  const mapBoxHeight = 16 + mapImgHeight + 24;
+
+  for (let i = 0; i < PRODUCT_TYPES.length; i++) {
+    const { id: productType, label } = PRODUCT_TYPES[i];
+    const product = getProduct(crop, productType, week, referenceMode) ?? getProduct(crop, productType, week, "forecast");
+    const col = i % mapCols;
+    if (col === 0) b.ensureSpace(mapBoxHeight + 10);
+    const x = b.margin + col * (mapColWidth + mapGap);
     const rowY = b.y;
-    placeImage(b, img, b.margin, rowY, b.contentWidth, imgHeight, mapImageLabel, `${cropLabel} · ${productLabel}`);
-    b.y = rowY + 16 + imgHeight + 20;
+
+    doc.setFontSize(9.5);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(17, 24, 39);
+    doc.text(label, x, rowY);
+    doc.setFontSize(8);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(107, 114, 128);
+    doc.text(!product || !product.dataAvailable ? "No data available for this combination" : product.units || " ", x, rowY + 11);
+
+    if (!product || !product.dataAvailable) {
+      doc.setDrawColor(209, 213, 219);
+      doc.rect(x, rowY + 16, mapColWidth, mapImgHeight);
+    } else if (product.layerType === "raster" && product.rasterUrl) {
+      const img = await fetchAsDataUrl(withBase(product.rasterUrl));
+      drawImageBox(b, img, x, rowY + 16, mapColWidth, mapImgHeight);
+    } else {
+      drawChoropleth({ doc, x, y: rowY + 16, width: mapColWidth, height: mapImgHeight, counties, product, metricsIndex, climatologyIndex, highlightGeoid: geoid });
+    }
+
+    if (col === mapCols - 1 || i === PRODUCT_TYPES.length - 1) {
+      b.y = rowY + mapBoxHeight;
+    }
   }
+  b.y += 10;
+  b.hr();
+  b.y += 2;
 
   // --- Per-lead-time results table ---
   b.ensureSpace(40 + sorted.length * 20);
