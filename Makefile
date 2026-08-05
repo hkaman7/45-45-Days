@@ -1,13 +1,15 @@
 WEB_DIR := apps/web-risk-viewer
-VENV := .venv/bin/activate
 
-.PHONY: dev install build data-prep help
+.PHONY: dev install build help
 
 help:
 	@echo "make dev          - install deps if needed, then launch the risk-viewer dev server (http://localhost:5173)"
 	@echo "make install      - npm install in $(WEB_DIR)"
 	@echo "make build        - production build of $(WEB_DIR)"
-	@echo "make data-prep    - regenerate apps/web-risk-viewer/public/data from the pipeline's outputs"
+	@echo ""
+	@echo "The data pipeline lives in a separate private repo (45-45-platform,"
+	@echo "sibling checkout) - to regenerate public/data, run its 08_prepare_"
+	@echo "webapp_data.py (and friends) from there. See that repo's README."
 
 dev:
 	@if [ ! -d "$(WEB_DIR)/node_modules" ]; then \
@@ -21,6 +23,3 @@ install:
 
 build:
 	cd $(WEB_DIR) && npm run build
-
-data-prep:
-	bash -c "source $(VENV) && python data_pipelines/pipelines/08_prepare_webapp_data.py"

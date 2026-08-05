@@ -12,21 +12,10 @@ env/
 
 .DS_Store
 
-data/
-products/
-# The frontend's own static asset directory is named "data" too - the bare
-# pattern above (meant for data_pipelines/data/ and data_pipelines/products/)
-# would otherwise silently exclude everything the deployed web app serves.
-!apps/web-risk-viewer/public/data/
-!apps/web-risk-viewer/public/data/**
-
-# This repo is public - the data pipeline (feature engineering, model
-# training, GEE queries, thresholds) and its backend API stay out of the
-# public history entirely. Their static OUTPUT (baked into
-# apps/web-risk-viewer/public/data/) is what's actually shipped/deployed.
-/data_pipelines/
-/apps/damage-api/
-/requirements.txt
+# The data pipeline and backend API that produce apps/web-risk-viewer/public/
+# data/ live in a separate private repo (45-45-platform, sibling checkout) -
+# nothing to gitignore for them here anymore, they're just not part of this
+# repo's tree at all. See 45-45-platform's README for how the two connect.
 
 .env
 .env.*
