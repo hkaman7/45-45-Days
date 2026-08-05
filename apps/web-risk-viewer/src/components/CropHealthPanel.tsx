@@ -7,6 +7,7 @@ import { formatNumber, formatPercent } from "../utils/formatters";
 import { useAppDispatch, useAppState } from "../state/AppStateContext";
 import { CropHealthMapColumn } from "./CropHealthMapColumn";
 import { EVENT_LABELS } from "./CropHealthControls";
+import { generateCropHealthReportPdf } from "../utils/pdfReport";
 
 interface Props {
   counties: FeatureCollection;
@@ -22,6 +23,7 @@ export function CropHealthPanel({ counties }: Props) {
   const [manifest, setManifest] = useState<CropHealthMapManifest | null>(null);
   const [manifestError, setManifestError] = useState<string | null>(null);
   const [fields, setFields] = useState<FeatureCollection | null>(null);
+  const [generatingPdf, setGeneratingPdf] = useState(false);
 
   // Same national counties_simplified.geojson Risk Viewer's MapView renders - just
   // scoped down to this event's own counties so the Crop Health maps show the same
@@ -72,8 +74,33 @@ export function CropHealthPanel({ counties }: Props) {
   const beforeWindow = sensor?.windows.before;
   const afterWindow = sensor?.windows.after;
 
+  const countyProps = eventCounties.features.find(
+    (f) => (f.properties as CountyFeatureProperties).geoid === selectedCropHealthGeoid,
+  )?.properties as CountyFeatureProperties | undefined;
+
   function onSelectField(csbId: string) {
     dispatch({ type: "SELECT_CROP_HEALTH_FIELD", fieldId: csbId });
+  }
+
+  async function onGenerateReport() {
+    if (!event || !summary || !county || !countyProps) return;
+    setGeneratingPdf(true);
+    try {
+      await generateCropHealthReportPdf({
+        event,
+        eventLabel: EVENT_LABELS[event.event_id] ?? event.event_id,
+        countyName: countyProps.county_name,
+        county,
+        threshold_f: summary.threshold_f,
+        summaryNote: summary.note,
+        manifest,
+        selectedIndex: selectedCropHealthIndex,
+        selectedIndexLabel: sensor?.label ?? selectedCropHealthIndex,
+        selectedFieldId: selectedCropHealthFieldId,
+      });
+    } finally {
+      setGeneratingPdf(false);
+    }
   }
 
   return (
@@ -85,19 +112,15 @@ export function CropHealthPanel({ counties }: Props) {
         </span>
         <span>
           <span className="label">County</span>
-          <b>
-            {(() => {
-              const props = eventCounties.features.find(
-                (f) => (f.properties as CountyFeatureProperties).geoid === selectedCropHealthGeoid,
-              )?.properties as CountyFeatureProperties | undefined;
-              return props ? `${props.county_name} County` : "—";
-            })()}
-          </b>
+          <b>{countyProps ? `${countyProps.county_name} County` : "—"}</b>
         </span>
         <span>
           <span className="label">Selected Field</span>
           <b>{selectedCropHealthFieldId ? `…${selectedCropHealthFieldId.slice(-6)}` : "none — click a field on the map"}</b>
         </span>
+        <button className="pdf-report-button" onClick={onGenerateReport} disabled={!county || !countyProps || generatingPdf}>
+          {generatingPdf ? "Generating…" : "📄 Generate PDF Report"}
+        </button>
       </div>
 
       {summaryError && <div className="map-placeholder-banner">{summaryError}</div>}
